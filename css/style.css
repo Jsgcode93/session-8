@@ -62,4 +62,31 @@ button{
 button:hover{
   background-color: black;
   border: 4px crimson solid;
+
+}
+/*Search sort style */
+
+
+/*movie list styles */ 
+#mlist{
+    border:6px double crimson;
+}
+ol{
+    margin-left: 1.5rem;
+    border: 2px solid #333333;
+    margin-bottom: 1.5rem;
+    margin-right: 1.5rem;
+}
+.list{
+    margin-top:0.5rem;
+}
+.list .row {
+    padding: 5px 15px;
+    cursor: pointer;
+}
+.list .row:nth-child(odd){
+    background-color: #dddddd;
+}
+.list .row:hover{
+    background-color: yellow;
 }
