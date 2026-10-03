@@ -50,30 +50,29 @@
  <section id="msg" class="msgBox"></section>
 <!--start tab section-->
 <!--tabs--> 
- <section class="tab">  
-   <button class="tablinks">Add new Movie</button> 
-   <button class="tablinks">Update Movie</button> 
-   <button class="tablinks">Delete Movie</button> 
- </section>
+    <section class="tab">
+      <button class="tablinks" onclick="openForm(event, 'Add')" id="defaultOpen">Add a New Movie</button>
+      <button class="tablinks" onclick="openForm(event, 'Update')">Update a Movie</button>
+      <button class="tablinks"onclick="openForm(event, 'Delete')">Delete a Movie</button>
+    </section>
  <!--End of tab section-->
 
  <!--Tab content --> 
 
  <!-- Add movie section -->
- <section id="add" class="tabcontent">       
-   <h2> add a movie </h2>
-   <form id="form-add">
-    <div class="mb-3">
-        <label for="movie-name">Movie Name</label>
-        <input type="text" placeholder="Title" id="addTitle">
-    </div>
+    <section id="Add" class="tabcontent">
+      <h2>Add a Movie</h2>
+      <form id="form-add">
         <div class="mb-3">
-        <label for="movie-year">Year</label>
-        <input type="text" placeholder="Year" id="addYear">
-    </div>
-    <button type="button" name="submit" id="addSubmit">Add Movie</button>
-   </form>
- </section>
+          <label for="addTitle">Title: </label>
+          <input type="text" placeholder="Title..." name="title" id="addTitle">
+        </div>
+        <div class="mb-3">
+          <label for="addYear">Year: </label>
+          <input type="text" placeholder="Year..." name="year" id="addYear">
+        </div>
+        <button type="button" name="submit" id="addSubmit">Add Movie</button>
+      </form>
 <!--End add movie-->
 
 <!--Update movie section -->
