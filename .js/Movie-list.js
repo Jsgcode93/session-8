@@ -22,4 +22,4 @@ class MovieList{
     this.movieList = movies  // The array of movies to be displayed
     this.refresh();
   }
-  // 
+  //
