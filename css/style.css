@@ -138,6 +138,9 @@ ol{
   display:inline-block;
   width: 93%;
 }
+.tabcontent button {
+  width: 100%;
+}
 /*Footer styles */
 footer{
   margin-top: 2rem;
