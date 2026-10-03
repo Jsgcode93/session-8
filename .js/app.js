@@ -33,3 +33,29 @@ function openForm(evt, action){
   evt.currentTarget.className += " active"
 }
 // End of openForm()
+
+// Open a tab by default(
+document.getElementById('defaultOpen').click();
+
+/**
+ * Get the current data and inject it into the footer
+ */
+const dateSpan = document.getElementById("date");
+// get the date
+const theDate = new Date();
+// Add the date into the DOM
+dateSpan.textContent = theDate.getFullYear();
+
+/**
+ * @function showMessage
+ * @param {string} message - the message to display
+ * @param {string} colour - the colour of the message box background
+ * @param {string} text - the colour of the text in the message box
+ */
+function showMessage(message, colour, text){
+  const msg = document.getElementById('msg');
+  msg.style.display = "block";
+  msg.textContent = message;
+  msg.style.backgroundColor = colour;
+  msg.style.color = text;
+}
