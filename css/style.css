@@ -125,22 +125,27 @@ ol {
 }
 /*tab content styles */
 .tabcontent {
+  display: none;
   padding: 1rem 1.5rem;
   border: 2px solid #333333;
   border-top: none;
 }
+
 .tabcontent h2 {
   margin-top: 0;
   text-align: center;
 }
+
 .tabcontent label {
   display: inline-block;
   width: 6%;
 }
+
 .tabcontent input {
-  display:inline-block;
+  display: inline-block;
   width: 93%;
 }
+
 .tabcontent button {
   width: 100%;
 }

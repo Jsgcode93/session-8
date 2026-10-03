@@ -2,10 +2,14 @@
  * @file app.js
  * @description This file contains JavaScript for our movie app.
  * It contains the movieList instance, the event functions and UI code.
- * cspell: ignore Jeremy Geddes tabcontent tablinks colour
+ * cspell: ignore Jeremy Geddes colour tabcontent tablinks 
  * @author Jeremy Geddes
  * @version 2.0
  
+ */
+/**
+ * @global
+ * @description The initial list of movies for our app.
  */
 
 let initialMovies = [

@@ -22,8 +22,9 @@ class MovieList{
     this.movieList = movies  // The array of movies to be displayed
     this.refresh();
   }
-  
-    /**
+  // Methods
+
+  /**
    * Generate one row of the movieList for display
    * It will create the necessary HTML elements fro displaying a single movie to the UI
    * @function movieRow
@@ -201,4 +202,3 @@ class MovieList{
     this.genMovieSearchList(shortList);
   }
 }
-  
