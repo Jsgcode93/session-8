@@ -106,14 +106,12 @@ ol{
   border: 2px solid #000000;
 }
 .tab button {
-  background-color: #f1f1f1;
   float: left;
   border: none;
   outline: none;
- 
   padding: 1rem 1.2rem;
   transition: 0.3s;
-  color: cyan
+  color: cyan;
 }
 .tab button.active {
   padding: 1rem 1.5rem;
