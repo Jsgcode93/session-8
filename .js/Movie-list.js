@@ -22,4 +22,24 @@ class MovieList{
     this.movieList = movies  // The array of movies to be displayed
     this.refresh();
   }
-  //
+  
+    /**
+   * Generate one row of the movieList for display
+   * It will create the necessary HTML elements fro displaying a single movie to the UI
+   * @function movieRow
+   * @param {string} title - The title of the movie
+   * @param {number} year - The year the movie was released
+   */
+  movieRow(title, year){
+    // Get the parent element
+    const rootElement = document.getElementById(this.rootId);
+    // Create a new li
+    const row = document.createElement('li');
+    // Add the class of row to the li we just created
+    row.classList.add('row');
+    row.textContent = `${title} (${year})`;
+    // Add the li to the list
+    rootElement.appendChild(row);
+  }
+
+  
