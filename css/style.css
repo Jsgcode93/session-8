@@ -111,7 +111,7 @@ ol{
   border: none;
   outline: none;
  
-  padding: 1 rem 1.2rem;
+  padding: 1rem 1.2rem;
   transition: 0.3s;
   color: cyan
 }
@@ -122,7 +122,7 @@ ol{
 }
 /*tab content styles */
 .tabcontent {
-  padding: 1 rem 1.5rem;
+  padding: 1rem 1.5rem;
   border: 2px solid #333333;
   border-top: none;
 }
@@ -131,8 +131,8 @@ ol{
   text-align: center;
 }
 .tabcontent label {
-  display:inline-block
-   width: 6%;
+  display: inline-block;
+  width: 6%;
 }
 .tabcontent input {
   display:inline-block;
