@@ -86,7 +86,7 @@ class MovieList{
   const childNodes = rootElement.getElementsByClassName('row');
   while (childNodes.length > 0) {
     rootElement.removeChild(childNodes[0]);
-  }
+  }}
 
    /**
     * A function that will return a row / movie from the movie list
