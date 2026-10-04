@@ -101,6 +101,7 @@ function addClick(){
   const pattern = /^[a-z0-9\s]*$/i
   const test = pattern.test(title);
   const yearIsInt = Number.isInteger(year);
+
   // output of our tests
   console.log(test);
   console.log(yearIsInt);

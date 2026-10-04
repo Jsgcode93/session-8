@@ -193,4 +193,4 @@ class MovieList{
     // call the genMovieSearchList
     this.genMovieSearchList(shortList);
   }
-}
+  }
