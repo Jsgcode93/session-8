@@ -80,20 +80,12 @@ class MovieList{
     * This allows a new list to be displayed
    * @function removeElements
    */
-  removeElements(){
-    // Getting the root ID
-    const rootElement = document.getElementById(this.rootId);
-    // Get all the elements with the class name of row.
-    const childNodes = document.getElementsByClassName('row');
-    // childNodes[0,1,2,3,4,5,6,7,8]
-    // How many children do we have?
-    const len = childNodes.length - 1;
-    for(let i = len; i >=0; i--){
-      // pull out the list child
-      const child = childNodes[i];
-      // Remove this child from the DOM
-      rootElement.removeChild(child);
-    }
+  removeElements() {
+  const rootElement = document.getElementById(this.rootId);
+  if (!rootElement) return;
+  const childNodes = rootElement.getElementsByClassName('row');
+  while (childNodes.length > 0) {
+    rootElement.removeChild(childNodes[0]);
   }
 
    /**
