@@ -32,7 +32,6 @@
     <section id="mList">                                    
      <h2 class ="ml-3">Movie List</h2>
 
-    </section>
 <!--Movie List start-->
 <ol class="list" id="list">
  <li class="row">the redemption(1994)</li>
@@ -43,18 +42,21 @@
  <li class="row">Drag me to hell (2011)</li>
  <li class="row">Bad boys 2 (2008)  </li>
  <li class="row">Get rich or die trying (2005)</li>
-</ol>    
+</ol>  
+<!--End movie list section -->
+    </section>  
 <!--Send move list section -->
 
 <!--section to display message-->
  <section id="msg" class="msgBox"></section>
+
 <!--start tab section-->
 <!--tabs--> 
-    <section class="tab">
+<section class="tab">
       <button class="tablinks" onclick="openForm(event, 'Add')" id="defaultOpen">Add a New Movie</button>
       <button class="tablinks" onclick="openForm(event, 'Update')">Update a Movie</button>
       <button class="tablinks"onclick="openForm(event, 'Delete')">Delete a Movie</button>
-    </section>
+</section>
  <!--End of tab section-->
 
  <!--Tab content --> 
@@ -119,7 +121,7 @@
 <!--load in our Javascript-->
  <!--the order we import the JS here is important-->
  <!--have the movie list first, allows app.js to access the class defined in this file -->
-<script src="./js/movie-list.js"></script>
+<script src="./js/Movie-list.js"></script>
 <script src="./js/app.js"></script>
 </body>           
 </html> 
