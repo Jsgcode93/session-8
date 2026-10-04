@@ -122,50 +122,7 @@
 <!--load in our Javascript-->
  <!--the order we import the JS here is important-->
  <!--have the movie list first, allows app.js to access the class defined in this file -->
-<script>
-    function openForm(evt, formName) {
-        console.log("Button clicked! Trying to open tab:", formName);
-        
-        // 1. Find the content sections
-        let tabcontent = document.getElementsByClassName("tabcontent");
-        console.log("Found this many tab sections:", tabcontent.length);
-        
-        if (tabcontent.length === 0) {
-            console.error("ERROR: Could not find any HTML elements with class='tabcontent'. Check your HTML spelling.");
-            return; // Stop the script
-        }
-
-        // Hide all tab content
-        for (let i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        
-        // 2. Find the buttons
-        let tablinks = document.getElementsByClassName("tablinks");
-        for (let i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        
-        // 3. Find the specific tab to open
-        let targetTab = document.getElementById(formName);
-        if (!targetTab) {
-            console.error("ERROR: Could not find an HTML element with id='" + formName + "'. Check your capital letters.");
-            return; // Stop the script
-        }
-
-        // Show the tab and set button to active
-        targetTab.style.display = "block";
-        evt.currentTarget.className += " active";
-        console.log("Success! Opened tab:", formName);
-    }
-
-    // Attempt to open the default tab on load
-    let defaultBtn = document.getElementById("defaultOpen");
-    if (defaultBtn) {
-        defaultBtn.click();
-    } else {
-        console.error("ERROR: Could not find the default button with id='defaultOpen'");
-    }
-</script>
+<script src="./js/Movie-list.js"></script>
+<script src="./js/app.js"></script>
 </body>           
 </html> 
