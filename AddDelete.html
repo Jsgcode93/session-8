@@ -30,21 +30,20 @@
  <!--End of tab section-->
 
 <!-- Add Movie Section -->
-        <section id="Add" class="tabcontent">        
-            <h2>Add a Movie</h2>
+<section id="Add" class="tabcontent card p-4 mb-4 shadow-sm">        
+            <h3 class="h4 mb-3">Add a Movie</h3>
             <form id="form-add">
                 <div class="mb-3">
-                    <label for="addTitle">Title: </label>
-                    <input type="text" placeholder="Title..." name="title" id="addTitle">
+                    <label for="addTitle" class="form-label">Title</label>
+                    <input type="text" class="form-control" placeholder="Movie title..." name="title" id="addTitle" required>
                 </div>
                 <div class="mb-3">
-                    <label for="addYear">Year: </label>
-                    <input type="text" placeholder="Year..." name="year" id="addYear">
+                    <label for="addYear" class="form-label">Year</label>
+                    <input type="number" class="form-control" placeholder="Release year..." name="year" id="addYear" required>
                 </div>
-                <button type="button" name="submit" id="addSubmit">Add Movie</button>
+                <button type="button" class="btn btn-success" id="addSubmit">Add Movie</button>
             </form>
         </section>
-
 <!--Update movie section -->
     <section id="Update" class="tabcontent">
       <h2>Update a Movie</h2>
