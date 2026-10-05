@@ -9,6 +9,25 @@
 </head>
 <body>
 <span id="navbar-placeholder"></span>
+ <!-- Main page content--> 
+  <main class="container"> 
+ <!-- Page Header-->   
+  <h1>&#127916; Movie DB &#127909;</h1>
+
+<section id="mList">                                    
+  <h2 class ="ml-3">Movie List</h2>
+
+    <ol class="list" id="list">
+    <li class="row">the redemption(1994)</li>
+    <li class="row">The Matrix (1999)</li>
+    <li class="row">SAW 1 (2002)</li>
+    <li class="row">Face Off (1999) </li>
+    <li class="row">Terminator (2000)</li>
+    <li class="row">Drag me to hell (2011)</li>
+    <li class="row">Bad boys 2 (2008)  </li>
+    <li class="row">Get rich or die trying (2005)</li>
+    </ol>  
+
 <!--tabs--> 
 <section class="tab">
       <button class="tablinks" onclick="openForm(event, 'Add')" id="defaultOpen">Add a New Movie</button>
@@ -67,7 +86,7 @@
       </form>
     </section>
 <!-- End delete movie -->
- 
+
   <!--Navbar Script-->
     <script> 
         fetch('Navbar.html')
