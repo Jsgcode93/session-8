@@ -1,4 +1,4 @@
-#  Movie App.
+#  MovieDB.
 This app will allow the user to view and manipulate a list of movies.
 The movie contain a title and a year.
 # MovieList - Class
