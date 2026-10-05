@@ -16,21 +16,23 @@
   <main class="container"> 
  <!-- Page Header-->   
   <h1>&#127916; Movie DB &#127909;</h1>
-    <!--Section for search and sort-->
-     <section class="search-sort">
-       <h2>Movie Search / sort </h2>
-       <form id="form-list-control">
+
+
+  <main class="container">
+    <section class="search-sort mb-4">
+      <h2>Movie Search / Sort</h2>
+      <form id="form-list-control">
         <div class="mb-3">      
-            <input type="text" placeholder="Movie-name" id="search-string">
-          </div>
-<!--Buttons to run search and sort function-->
-   <div class="mb-3">
-    <button type="button" name="btn-search" id="searchBtn">Search</button>
-    <button type="button" name="btn-a2z" id="sortA2ZBtn">Sort (A-Z)</button>
-    <button type="button" name="btn-z2a" id="sortZ2ABtn">Sort (Z-A)</button>
-   </div>
-   </form>
- </section>
+          <input type="text" placeholder="Movie title..." id="search-string">
+        </div>
+        <div class="mb-3">
+          <button type="button" id="searchBtn">Search</button>
+          <button type="button" id="sortA2ZBtn">Sort (A-Z)</button>
+          <button type="button" id="sortZ2ABtn">Sort (Z-A)</button>
+        </div>
+      </form>
+    </section>
+
 <!--End search and sort section-->
 <script src="./js/Movie-list.js"></script>
 <!--app.js file-->
