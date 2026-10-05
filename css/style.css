@@ -61,7 +61,7 @@ button{
 
 button:hover{
   background-color: black;
-  border: 4px crimson solid;
+  border: 4px yellow solid;
 
 }
 /*Search sort style */
@@ -120,35 +120,21 @@ ol {
 }
 .tab button.active {
   padding: 1rem 1.5rem;
-  border: 2px solid #333333;
+  background-color: yellow;
   border-top:none;
 }
 /*tab content styles */
-.tabContent {
-  display: none;
-  padding: 1rem 1.5rem;
-  border: 2px solid #333333;
-  border-top: none;
-}
+.mb-3 {
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-.tabContent h2 {
-  margin-top: 0;
-  text-align: center;
-}
+  .search-sort form .mb-3 button {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
 
-.tabContent label {
-  display: inline-block;
-  width: 6%;
-}
-
-.tabContent input {
-  display: inline-block;
-  width: 93%;
-}
-
-.tabContent button {
-  width: 100%;
-}
 /*Footer styles */
 footer{
   margin-top: 2rem;
