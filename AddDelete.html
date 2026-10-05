@@ -44,26 +44,25 @@
                 <button type="button" class="btn btn-success" id="addSubmit">Add Movie</button>
             </form>
         </section>
-<!--Update movie section -->
-    <section id="Update" class="tabcontent">
-      <h2>Update a Movie</h2>
-      <form id="form-update">
-        <div class="mb-3">
-          <label for="upIndex">Index: </label>
-          <input type="text" placeholder="Index..." name="index" id="upIndex">
-        </div>
-        <div class="mb-3">
-          <label for="upTitle">Title: </label>
-          <input type="text" placeholder="Title..." name="title" id="upTitle">
-        </div>
-        <div class="mb-3">
-          <label for="upYear">Year: </label>
-          <input type="text" placeholder="Year..." name="year" id="upYear">
-        </div>
-        <button type="button" name="submit" id="updateSubmit">Update Movie</button>
-      </form>
-    </section>
-<!--End update section-->
+<!-- Update Movie Section -->
+        <section id="Update" class="tabcontent card p-4 mb-4 shadow-sm" style="display: none;">
+            <h3 class="h4 mb-3">Update a Movie</h3>
+            <form id="form-update">
+                <div class="mb-3">
+                    <label for="upIndex" class="form-label">Movie Index / ID</label>
+                    <input type="number" class="form-control" placeholder="Index..." name="index" id="upIndex" required>
+                </div>
+                <div class="mb-3">
+                    <label for="upTitle" class="form-label">New Title</label>
+                    <input type="text" class="form-control" placeholder="New title..." name="title" id="upTitle" required>
+                </div>
+                <div class="mb-3">
+                    <label for="upYear" class="form-label">New Year</label>
+                    <input type="number" class="form-control" placeholder="New year..." name="year" id="upYear" required>
+                </div>
+                <button type="button" class="btn btn-warning" id="updateSubmit">Update Movie</button>
+            </form>
+        </section>
 
 <!--Delete movie-->
 <section id="Delete" class="tabcontent card p-4 mb-4 shadow-sm" style="display: none;">    
