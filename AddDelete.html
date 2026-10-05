@@ -9,6 +9,13 @@
 </head>
 <body>
 <span id="navbar-placeholder"></span>
+<!--tabs--> 
+<section class="tab">
+      <button class="tablinks" onclick="openForm(event, 'Add')" id="defaultOpen">Add a New Movie</button>
+      <button class="tablinks" onclick="openForm(event, 'Update')">Update a Movie</button>
+      <button class="tablinks"onclick="openForm(event, 'Delete')">Delete a Movie</button>
+</section>
+ <!--End of tab section-->
 
 <!-- Add movie section -->
         <section id="Add" class="tabcontent">        
@@ -60,6 +67,7 @@
       </form>
     </section>
 <!-- End delete movie -->
+ 
   <!--Navbar Script-->
     <script> 
         fetch('Navbar.html')
