@@ -67,17 +67,17 @@
 <!--End update section-->
 
 <!--Delete movie-->
-    <section id="Delete" class="tabcontent">    
-      <h2>Delete a Movie</h2>
-      <form id="form-delete">
-        <div class="mb-3">
-          <label for="delIndex">Index: </label>
-          <input type="text" placeholder="Index..." name="index" id="delIndex">
-        </div>
-        <button type="button" name="submit" id="deleteSubmit">Delete a Movie</button>
-      </form>
-    </section>
-</main>    
+<section id="Delete" class="tabcontent card p-4 mb-4 shadow-sm" style="display: none;">    
+            <h3 class="h4 mb-3">Delete a Movie</h3>
+            <form id="form-delete">
+                <div class="mb-3">
+                    <label for="delIndex" class="form-label">Movie Index / ID</label>
+                    <input type="number" class="form-control" placeholder="Index to delete..." name="index" id="delIndex" required>
+                </div>
+                <button type="button" class="btn btn-danger" id="deleteSubmit">Delete Movie</button>
+            </form>
+        </section>
+    </main>  
 <!-- End delete movie -->
  <!-- JavaScript Files -->
     <script src="./js/Movie-list.js"></script>
