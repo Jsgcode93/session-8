@@ -33,29 +33,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-/**
- * Handles search button clicks
- */
-function searchClick() {
-    let text = document.getElementById("search-string").value;
-    movieList.search(text);
-}
-// Getting all the buttons from our application
-const searchBtn = document.getElementById('searchBtn');
-const sortA2ZBtn = document.getElementById('sortA2ZBtn');
-const sortZ2ABtn = document.getElementById('sortZ2ABtn');
-const addSubmit = document.getElementById('addSubmit');
-const updateSubmit = document.getElementById('updateSubmit');
-const deleteSubmit = document.getElementById('deleteSubmit');
+// 2. Initialize the MovieList 
+    movieList = new MovieList('list', defaultMovies);
 
-// Add event handlers
-searchBtn.addEventListener('click', searchClick);
-sortA2ZBtn.addEventListener('click', a2zClick);
-sortZ2ABtn.addEventListener('click', z2aClick);
-addSubmit.addEventListener('click', addClick);
-updateSubmit.addEventListener('click', updateClick);
-deleteSubmit.addEventListener('click', deleteClick);
+    // 3. Event Listeners
+    const searchBtn = document.getElementById("searchBtn");
+    if (searchBtn) searchBtn.addEventListener("click", searchClick);
 
+    // Sort Dropdown Event Listener
+    const sortSelect = document.getElementById("sortSelect");
+    if (sortSelect) {
+        sortSelect.addEventListener("change", function() {
+            switch (this.value) {
+                case 'a2z': movieList.sortA2Z(); break;
+                case 'z2a': movieList.sortZ2A(); break;
+                case 'yearNew': movieList.sortByYear(false); break; // false = descending (newest first)
+                case 'yearOld': movieList.sortByYear(true); break;  // true = ascending (oldest first)
+                case 'ratingHigh': movieList.sortByRating(false); break; // false = descending (highest first)
+                case 'ratingLow': movieList.sortByRating(true); break;  // true = ascending (lowest first)
+                default: break;
+            }
+        });
+    }
 /** 
  * Search for a movie by partial title
  * @event Click#searchBtn
@@ -262,7 +261,7 @@ function showMessage(message, colour, text){
 // Add in more properties for the movie
 // id, rating, description, movieImage (movie poster).
 // Upgrade the UI
-// Make it multiple pages
+// Make it multiple pages 
 // Search by ID or year or rating
 // Sort by year or rating
 // Timeout or cancel for showMessage
