@@ -1,53 +1,45 @@
 /**
- * @file Movie-list.js
- * @description Object-oriented Movie and MovieList classes with advanced search, sort, and validation.
+ * @file app.js
+ * @description Main application controller linking HTML elements to MovieList and Movie classes.
  */
 
-/**
- * Represents an individual Movie item.
- */
-class Movie {
-    constructor(id, title, year, rating, description, movieImage) {
-        this.id = id;
-        this.title = title;
-        this.year = Number(year);
-        this.rating = Number(rating);
-        this.description = description || "No description provided.";
-        this.movieImage = movieImage || "https://via.placeholder.com/150";
+let movieList;
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Initial fallback data if localStorage is empty
+    const defaultMovies = [
+        { title: "The Shawshank Redemption", year: 1994, rating: 9.3, description: "Two imprisoned men bond over years.", movieImage: "" },
+        { title: "The Matrix", year: 1999, rating: 8.7, description: "A hacker learns the truth about reality.", movieImage: "" },
+        { title: "Inception", year: 2010, rating: 8.8, description: "A thief who steals corporate secrets through dream-sharing.", movieImage: "" }
+    ];
+
+    // 2. Initialize the MovieList instance targeting <ol id="list">
+    movieList = new MovieList('list', defaultMovies);
+
+    // 3. Attach event listeners to buttons
+    const searchBtn = document.getElementById("searchBtn");
+    if (searchBtn) {
+        searchBtn.addEventListener("click", searchClick);
     }
+
+    const sortA2ZBtn = document.getElementById("sortA2ZBtn");
+    if (sortA2ZBtn) {
+        sortA2ZBtn.addEventListener("click", () => movieList.sortA2Z());
+    }
+
+    const sortZ2ABtn = document.getElementById("sortZ2ABtn");
+    if (sortZ2ABtn) {
+        sortZ2ABtn.addEventListener("click", () => movieList.sortZ2A());
+    }
+});
+
+/**
+ * Handles search button clicks
+ */
+function searchClick() {
+    let text = document.getElementById("search-string").value;
+    movieList.search(text);
 }
-
-/**
- * Manages the collection of Movie instances, DOM rendering, search, sort, and persistence.
- */
-class MovieList {
-    constructor(containerId, initialData = []) {
-        this.containerId = containerId;
-        
-        // Load from localStorage if available, otherwise initialize with default data
-        const savedData = localStorage.getItem('movieDB');
-        if (savedData) {
-            const parsed = JSON.parse(savedData);
-            this.movieList = parsed.map(m => new Movie(m.id, m.title, m.year, m.rating, m.description, m.movieImage));
-        } else {
-            this.movieList = initialData.map((m, index) => new Movie(index + 1, m.title, m.year, m.rating || 7.5, m.description || "", m.movieImage || ""));
-            this.saveToStorage();
-        }
-        
-        this.render(this.movieList);
-    }
-
-/**
- * @memberof MovieList
- * @instance movieList
- * @param {string} - The id of the element we want to have our movieList appear in
- * @param {Array} initialMovies - The array of movies in our movieList
- * @global
- * @description The movieList instance to keep track of our list of movies in the app
- */
-
-let movieList = new MovieList('list', initialMovies);
-
 // Getting all the buttons from our application
 const searchBtn = document.getElementById('searchBtn');
 const sortA2ZBtn = document.getElementById('sortA2ZBtn');
