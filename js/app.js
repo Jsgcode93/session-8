@@ -55,27 +55,36 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-/** 
- * Search for a movie by partial title
- * @event Click#searchBtn
- * @function searchClick
- */
+/*  Add a new movie to the movielist */
+function addClick() {
+    const formElements = document.getElementById("form-add").elements;
+    const title = formElements["title"].value.trim();
+    const year = Number(formElements["year"].value);
+    const rating = Number(formElements["rating"].value) || 0;
+    const description = formElements["description"].value.trim();
+    const movieImage = formElements["movieImage"].value.trim();
 
-function searchClick(){
-    // FIXED: Directly target the input by ID to avoid form collection bugs
-    let text = document.getElementById("search-string").value;
-    // run the search method
-    movieList.search(text);
-}
-/**
- * Sort the movieList in ascending order
- * @event Click#a2zButton
- * @function a2zClick
- */
-function a2zClick(){
-  movieList.sortA2Z();
-}
+    const pattern = /^[a-z0-9\s]*$/i;
+    const isValidTitle = pattern.test(title);
+    const isValidYear = Number.isInteger(year) && year >= 1888;
+    const isValidRating = rating >= 0 && rating <= 10;
 
+    if (isValidTitle && isValidYear && isValidRating) {
+        try {
+            movieList.add(title, year, rating, description, movieImage);
+            document.getElementById("form-add").reset();
+            showMessage("Movie Added Successfully", "chartreuse", "black");
+        } catch (err) {
+            showMessage(err.message, "red", "white");
+        }
+    } else if (!isValidTitle) {
+        showMessage("Invalid title: must be alphanumeric with spaces only", "red", "white");
+    } else if (!isValidYear) {
+        showMessage("Invalid year: must be a valid integer from 1888 onwards", "red", "white");
+    } else {
+        showMessage("Invalid rating: must be between 0 and 10", "red", "white");
+    }
+}
 /**
  * Sort the movieList in descending order
  * @event Click#z2aButton
