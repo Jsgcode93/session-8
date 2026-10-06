@@ -17,25 +17,8 @@
   <main class="container"> 
  <!-- Page Header-->   
   <h1>&#127916; Movie DB &#127909;</h1>
-  <!--Section for search and sort-->
-     <section class="search-sort">
-       <h2>Movie Search / sort </h2>
-       <form id="form-list-control">
-        <div class="mb-3">      
-            <input type="text" placeholder="Movie-name" id="search-string">
-          </div>
-<!--Buttons to run search and sort function-->
-   <div class="mb-3">
-    <button type="button" name="btn-search" id="searchBtn">Search</button>
-    <button type="button" name="btn-a2z" id="sortA2ZBtn">Sort (A-Z)</button>
-    <button type="button" name="btn-z2a" id="sortZ2ABtn">Sort (Z-A)</button>
-   </div>
-   </form>
- </section>
-<!--End search and sort section-->
-
+ 
 <main class="container">
-    <h1>🎬 Movie Collection</h1>
     <section id="mList">
       <h2>All Movies</h2>
       <ol class="list" id="list"></ol>
@@ -48,14 +31,6 @@
 <!--section to display message-->
  <section id="msg" class="msgBox"></section>
 
-<!--start tab section-->
-<!--tabs--> 
-<section class="tab">
-      <button class="tablinks" onclick="openForm(event, 'Add')" id="defaultOpen">Add a New Movie</button>
-      <button class="tablinks" onclick="openForm(event, 'Update')">Update a Movie</button>
-      <button class="tablinks"onclick="openForm(event, 'Delete')">Delete a Movie</button>
-</section>
- <!--End of tab section-->
 
 <!--footer-->
 <footer>
