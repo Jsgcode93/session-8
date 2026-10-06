@@ -88,36 +88,26 @@ function z2aClick(){
  * @description add a new movie to the list
  */
 function addClick(){
-  // Get form from the DOM
-  let formElements = document.getElementById("form-add").elements;
-  // get the title and the year
-  let title = formElements["title"].value;
-  let year = Number(formElements["year"].value);
-  // Add in validation.
-  // We can test our year and title
-  // We can also add in rules to test the input
-  console.log(title);
-  console.log(year);
-  const pattern = /^[a-z0-9\s]*$/i
-  const test = pattern.test(title);
-  const yearIsInt = Number.isInteger(year);
+    // Get form from the DOM
+    let formElements = document.getElementById("form-add").elements;
+    // get the title and the year
+    let title = formElements["title"].value;
+    let year = Number(formElements["year"].value);
+    
+    const pattern = /^[a-z0-9\s]*$/i;
+    const test = pattern.test(title);
+    const yearIsInt = Number.isInteger(year);
 
-  // output of our tests
-  console.log(test);
-  console.log(yearIsInt);
-  if (test && yearIsInt){
-  // Save to the movieList
-  movieList.add(title, Number(year));
-  // Clear the input fields
-    formElements.title.value = "";
-    formElements.title.year = "";
-  } else if(!test){
-  // alert("Invalid title, must be alphanumeric with spaces only");
-  showMessage("Invalid title, must be alphanumeric with spaces only", "red", "white");
-  } else {
-  // alert("Invalid year, must be an integer");
-  showMessage("Invalid year, must be an integer", "red", "white");
-  }
+    if (test && yearIsInt){
+        movieList.add(title, Number(year));
+        formElements.title.value = "";
+        formElements.year.value = "";
+        showMessage("Movie Added Successfully", "chartreuse", "black");
+    } else if(!test){
+        showMessage("Invalid title, must be alphanumeric with spaces only", "red", "white");
+    } else {
+        showMessage("Invalid year, must be an integer", "red", "white");
+    }
 }
 
 /**
@@ -154,32 +144,26 @@ upIndex.addEventListener('change', getData);
  * @description Update a movie in the list
  */
 function updateClick(){
-  // Getting the form elements
-  let formElements = document.getElementById("form-update").elements;
-  // Get the values
-  let index = Number(formElements["index"].value -1 );
-  let title = formElements["title"].value;
-  let year = Number(formElements["year"].value);
-  // Add in Validation 
-  // Use the same validation for addClick.
-  const pattern = /^[a-z0-9\s]*$/i
-  const test = pattern.test(title);
-  const yearIsInt = Number.isInteger(year);
-  // output of our tests
-  console.log(test);
-  console.log(yearIsInt);
-  if (test && yearIsInt){
-    // Update the movieList
-    movieList.update(Number(index), title, Number(year));
-    // Clear the input fields
-    formElements.index.value = "";
-    formElements.title.value = "";
-    formElements.year.value = "";
-  } else if(!test){
-    showMessage("Invalid title, must be alphanumeric with spaces only", "red", "white");
-  } else {
-    showMessage("Invalid year, must be an integer", "red", "white");
-  }  
+    let index = Number(document.getElementById("upIndex").value) - 1;
+    let title = document.getElementById("upTitle").value;
+    let year = Number(document.getElementById("upYear").value);
+    
+    // Use the same validation as addClick
+    const pattern = /^[a-z0-9\s]*$/i;
+    const test = pattern.test(title);
+    const yearIsInt = Number.isInteger(year);
+
+    if (test && yearIsInt){
+        movieList.update(index, title, year);
+        document.getElementById("upIndex").value = "";
+        document.getElementById("upTitle").value = "";
+        document.getElementById("upYear").value = "";
+        showMessage("Movie Updated Successfully", "chartreuse", "black");
+    } else if(!test){
+        showMessage("Invalid title, must be alphanumeric with spaces only", "red", "white");
+    } else {
+        showMessage("Invalid year, must be an integer", "red", "white");
+    }  
 }
 
 /**
