@@ -1,27 +1,41 @@
 /**
- * @file app.js
- * @description This file contains JavaScript for our movie app.
- * It contains the movieList instance, the event functions and UI code.
- * cspell: ignore Jeremy Geddes colour tabcontent tablinks 
- * @author Jeremy Geddes
- * @version 2.0
- 
- */
-/**
- * @global
- * @description The initial list of movies for our app.
+ * @file Movie-list.js
+ * @description Object-oriented Movie and MovieList classes with advanced search, sort, and validation.
  */
 
-let initialMovies = [
-  {title: "The Redemption", year: 1994 },
-  {title: "The Matrix" , year: 1999 },
-  {title: "SAW 1 ", year: 2002 },
-  {title: "Face Off", year: 1997 },
-  {title: "The Terminator", year: 2000 },
-  {title: "Drag me to hell", year: 2011 },
-  {title: "Bad boys 2", year: 2008 },
-  {title: "Get rich or die trying", year: 2005 }
-];
+/**
+ * Represents an individual Movie item.
+ */
+class Movie {
+    constructor(id, title, year, rating, description, movieImage) {
+        this.id = id;
+        this.title = title;
+        this.year = Number(year);
+        this.rating = Number(rating);
+        this.description = description || "No description provided.";
+        this.movieImage = movieImage || "https://via.placeholder.com/150";
+    }
+}
+
+/**
+ * Manages the collection of Movie instances, DOM rendering, search, sort, and persistence.
+ */
+class MovieList {
+    constructor(containerId, initialData = []) {
+        this.containerId = containerId;
+        
+        // Load from localStorage if available, otherwise initialize with default data
+        const savedData = localStorage.getItem('movieDB');
+        if (savedData) {
+            const parsed = JSON.parse(savedData);
+            this.movieList = parsed.map(m => new Movie(m.id, m.title, m.year, m.rating, m.description, m.movieImage));
+        } else {
+            this.movieList = initialData.map((m, index) => new Movie(index + 1, m.title, m.year, m.rating || 7.5, m.description || "", m.movieImage || ""));
+            this.saveToStorage();
+        }
+        
+        this.render(this.movieList);
+    }
 
 /**
  * @memberof MovieList
@@ -55,15 +69,13 @@ deleteSubmit.addEventListener('click', deleteClick);
  * @event Click#searchBtn
  * @function searchClick
  */
-function searchClick(){
-  // get the text from the DOM
-  let formElements = document.getElementById("form-list-control").elements;
-  // get the text from the input field
-  let text = formElements["search-string"].value;
-  // run the search method
-  movieList.search(text);
-}
 
+function searchClick(){
+    // FIXED: Directly target the input by ID to avoid form collection bugs
+    let text = document.getElementById("search-string").value;
+    // run the search method
+    movieList.search(text);
+}
 /**
  * Sort the movieList in ascending order
  * @event Click#a2zButton
