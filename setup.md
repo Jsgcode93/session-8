@@ -1,7 +1,7 @@
 # Setup the Movie app
 This app has the following structure
 ## Folders
-movieappv3.1 - the root app folder
+
 This folder holds index.html and the folders below
   CSS - The folder to hold style.css
   JS - The folder that holds app.js and movie-list.js
@@ -10,6 +10,10 @@ This folder holds index.html and the folders below
 This file will originally hold our movieList hard coded in
 We will then slowly add in our JavaScript
 Starting with our CRUD forms
+
+## AddDelete.html
+This file will hold our CRUD
+
 
 ## style.css
 This file will hold all our CSS for this app.
