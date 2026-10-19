@@ -262,3 +262,21 @@ function showMessage(message, colour, text){
 // Search by ID or year or rating
 // Sort by year or rating
 // Timeout or cancel for showMessage
+document.addEventListener("DOMContentLoaded", () => {
+    const manager = new MovieManager();
+    const listContainer = document.getElementById("list");
+
+    function renderList() {
+        listContainer.innerHTML = "";
+        manager.movies.forEach(movie => {
+            const li = document.createElement("li");
+            li.className = "list-group-item d-flex justify-content-between align-items-center mb-2 shadow-sm";
+            li.innerHTML = `
+                <span><strong>ID ${movie.id}:</strong> ${movie.title} (${movie.year}) - Rating: ${movie.rating}</span>
+            `;
+            listContainer.appendChild(li);
+        });
+    }
+
+    renderList();
+});
