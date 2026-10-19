@@ -6,8 +6,7 @@
  * @version 3.0.0
  */
 
-
-  class Movie {
+class Movie {
     constructor(id, title, year) {
         this.id = id;
         this.title = title;
