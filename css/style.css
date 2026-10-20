@@ -111,37 +111,41 @@ ol {
 .list .row:nth-child(odd) {
   background-color: #f8fafc;
 }
-/*tab section styles */
-.tab{
+ 
+.list .row:hover {
+  background-color: #e0f2fe;
+  color: #0f172a;
+}
+
+/* Tab section styles */
+.tab {
   margin-top: 1rem;
   overflow: hidden;
-  border: 2px solid #000000;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background-color: #ffffff;
 }
 .tab button {
   float: left;
   border: none;
   outline: none;
   padding: 1rem 1.2rem;
-  transition: 0.3s;
-  color: cyan;
+  transition: 0.2s;
+  background-color: transparent;
+  color: #475569;
+  font-weight: 600;
+  border-radius: 0;
+}
+.tab button:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  border: none;
 }
 .tab button.active {
-  padding: 1rem 1.5rem;
-  background-color: yellow;
-  border-top:none;
+  background-color: #1e3d59;
+  color: #ffffff;
+  border: none;
 }
-/*tab content styles */
-.mb-3 {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .search-sort form .mb-3 button {
-    margin-right: 0;
-    margin-bottom: 0.5rem;
-    width: 100%;
-  }
-
 /*Footer styles */
 footer{
   margin-top: 2rem;
