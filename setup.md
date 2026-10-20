@@ -3,28 +3,22 @@ This app has the following structure
 ## Folders
 
 This folder holds index.html and the folders below
-  CSS - The folder to hold style.css
-  JS - The folder that holds app.js and movie-list.js
+ CSS - The folder to hold style.css
+ JS - The folder that holds app.js and movie-list.js
 
 ## index.html
-This file will originally hold our movieList hard coded in
-We will then slowly add in our JavaScript
-Starting with our CRUD forms
+This file displays our list of movies on the main page
 
 ## AddDelete.html
-This file will hold our CRUD
+This file holds our forms to add, update, and delete movies with an ID, title, year, and rating
 
 
 ## style.css
-This file will hold all our CSS for this app.
+This file holds all our CSS styling for this app.
 
 ## app.js
-This file will hold our class instance of our MovieList class
-The event functions
-And our UI code
-For further information, look at Readme.md
+This file holds our button clicks, form handlers, and UI code
 
-## movie-app.js
-This file will holder our Class definition for our MovieList class.
-It will contain the attributes and methods for this class.
+## movie-list.js
+This file holds our Movie class and MovieList class to manage our movies and save them in browser storage.
 For further information, look at Readme.md
