@@ -4,14 +4,13 @@
  * It contains the movieList instance, the event functions and UI code.
  * cspell: ignore Jeremy Geddes colour tabcontent tablinks 
  * @author Jeremy Geddes
- * @version 2.0
- 
+ * @version 2.1
  */
+
 /**
  * @global
  * @description The initial list of movies for our app.
  */
-
 let initialMovies = [
   {title: "The Redemption", year: 1994, rating: 9.3 },
   {title: "The Matrix" , year: 1999, rating: 8.7 },
@@ -26,12 +25,11 @@ let initialMovies = [
 /**
  * @memberof MovieList
  * @instance movieList
- * @param {string} - The id of the element we want to have our movieList appear in
+ * @param {string} rootId - The id of the element we want to have our movieList appear in
  * @param {Array} initialMovies - The array of movies in our movieList
  * @global
  * @description The movieList instance to keep track of our list of movies in the app
  */
-
 let movieList = new MovieList('list', initialMovies);
 
 // Getting all the buttons from our application
@@ -42,13 +40,13 @@ const addSubmit = document.getElementById('addSubmit');
 const updateSubmit = document.getElementById('updateSubmit');
 const deleteSubmit = document.getElementById('deleteSubmit');
 
-// Add event handlers
-searchBtn.addEventListener('click', searchClick);
-sortA2ZBtn.addEventListener('click', a2zClick);
-sortZ2ABtn.addEventListener('click', z2aClick);
-addSubmit.addEventListener('click', addClick);
-updateSubmit.addEventListener('click', updateClick);
-deleteSubmit.addEventListener('click', deleteClick);
+// Add event handlers (with safety checks)
+if (searchBtn) searchBtn.addEventListener('click', searchClick);
+if (sortA2ZBtn) sortA2ZBtn.addEventListener('click', a2zClick);
+if (sortZ2ABtn) sortZ2ABtn.addEventListener('click', z2aClick);
+if (addSubmit) addSubmit.addEventListener('click', addClick);
+if (updateSubmit) updateSubmit.addEventListener('click', updateClick);
+if (deleteSubmit) deleteSubmit.addEventListener('click', deleteClick);
 
 /** 
  * Search for a movie by partial title
@@ -56,11 +54,8 @@ deleteSubmit.addEventListener('click', deleteClick);
  * @function searchClick
  */
 function searchClick(){
-  // get the text from the DOM
   let formElements = document.getElementById("form-list-control").elements;
-  // get the text from the input field
   let text = formElements["search-string"].value;
-  // run the search method
   movieList.search(text);
 }
 
@@ -87,28 +82,34 @@ function z2aClick(){
  * @function addClick
  * @description add a new movie to the list
  */
-function addClick(){
-    // Get form from the DOM
+function addClick() {
     let formElements = document.getElementById("form-add").elements;
-    // get the title and the year
     let title = formElements["title"].value;
     let year = Number(formElements["year"].value);
+    let rating = Number(formElements["rating"].value);
     
     const pattern = /^[a-z0-9\s]*$/i;
     const test = pattern.test(title);
     const yearIsInt = Number.isInteger(year);
+    const ratingIsValid = !isNaN(rating) && rating >= 0 && rating <= 10;
 
-    if (test && yearIsInt){
-        movieList.add(title, Number(year));
+    if (test && yearIsInt && ratingIsValid) {
+        movieList.add(title, year, rating); 
+
         formElements.title.value = "";
         formElements.year.value = "";
+        formElements.rating.value = "";
+        
         showMessage("Movie Added Successfully", "chartreuse", "black");
-    } else if(!test){
+    } else if (!test) {
         showMessage("Invalid title, must be alphanumeric with spaces only", "red", "white");
-    } else {
+    } else if (!yearIsInt) {
         showMessage("Invalid year, must be an integer", "red", "white");
+    } else {
+        showMessage("Invalid rating, must be between 0 and 10", "red", "white");
     }
 }
+
 
 /**
  * Get movie data from the movie list to update when typing an index in the index input in the update form
@@ -252,16 +253,6 @@ function showMessage(message, colour, text){
   msg.style.color = text;
 }
 
-// Expand this application
-// Finish validation for updating
-// use a class for each Movie
-// Add in more properties for the movie
-// id, rating, description, movieImage (movie poster).
-// Upgrade the UI
-// Make it multiple pages
-// Search by ID or year or rating
-// Sort by year or rating
-// Timeout or cancel for showMessage
 document.addEventListener("DOMContentLoaded", () => {
     const manager = new MovieManager();
     const listContainer = document.getElementById("list");
