@@ -1,29 +1,24 @@
- /**
- * @file movie-list.js
- * @description This file holds the class definition of our MovieList class
- * cSpell: ignore Jeremy Geddes
+/**
+ * @file Movie-list.js
+ * @description Movie and MovieList classes with localStorage and Rating support.
  * @author Jeremy Geddes
- * @version 3.0.0
  */
 
 class Movie {
-    constructor(id, title, year) {
+    constructor(id, title, year, rating) {
         this.id = id;
         this.title = title;
-        this.year = year;
+        this.year = Number(year);
+        this.rating = Number(rating);
     }
 }
-class MovieList {
-    /**
-     * @param {string} containerId - The ID of the HTML element where the list renders
-     * @param {Array} defaultMovies - Fallback data if storage is empty
-     */
-    constructor(containerId, defaultMovies = []) {
-        this.containerId = containerId;
-        this.movieList = this.loadFromStorage(defaultMovies);
-        this.render();
-    }
 
+class MovieList {
+    constructor(rootId, defaultMovies = []) {
+        this.rootId = rootId;
+        this.movieList = this.loadFromStorage(defaultMovies);
+        this.refresh();
+    }
 
 // --- Storage Methods ---
     loadFromStorage(defaultMovies) {
