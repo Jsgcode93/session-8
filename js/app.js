@@ -13,14 +13,14 @@
  */
 
 let initialMovies = [
-  {title: "The Redemption", year: 1994 },
-  {title: "The Matrix" , year: 1999 },
-  {title: "SAW 1 ", year: 2002 },
-  {title: "Face Off", year: 1997 },
-  {title: "The Terminator", year: 2000 },
-  {title: "Drag me to hell", year: 2011 },
-  {title: "Bad boys 2", year: 2008 },
-  {title: "Get rich or die trying", year: 2005 }
+  {title: "The Redemption", year: 1994, rating: 9.3 },
+  {title: "The Matrix" , year: 1999, rating: 8.7 },
+  {title: "SAW 1 ", year: 2002, rating: 7.6 },
+  {title: "Face Off", year: 1997, rating: 7.3 },
+  {title: "The Terminator", year: 2000, rating: 8.1 },
+  {title: "Drag me to hell", year: 2011, rating: 6.6 },
+  {title: "Bad boys 2", year: 2008, rating: 6.8 },
+  {title: "Get rich or die trying", year: 2005, rating: 5.4 }
 ];
 
 /**
