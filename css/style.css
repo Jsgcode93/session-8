@@ -146,22 +146,26 @@ ol {
   color: #ffffff;
   border: none;
 }
-/*Footer styles */
-footer{
+/* Footer styles */
+footer {
   margin-top: 2rem;
-  border: 6px double crimson;
+  border: 2px solid #1e3d59;
+  background-color: #ffffff;
   text-align: right;
-  color: crimson;
-  padding: 2rem;
-  font-size: 1.5rem;
+  color: #1e3d59;
+  padding: 1.5rem;
+  font-size: 1.2rem;
+  border-radius: 6px;
 }
-footer p{
-  padding-right:1.5rem;
+footer p {
+  padding-right: 1.5rem;
 }
+
 .msgBox {
-  margin-top: 1rem;;
+  margin-top: 1rem;
   padding: 1rem;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  border-radius: 4px;
   display: none;
 }
