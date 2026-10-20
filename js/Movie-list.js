@@ -20,97 +20,98 @@ class MovieList {
         this.refresh();
     }
 
-// --- Storage Methods ---
-    loadFromStorage(defaultMovies) {
+loadFromStorage(defaultMovies) {
         const stored = localStorage.getItem('movieDatabase');
         if (stored) {
-            return JSON.parse(stored);
+            const parsed = JSON.parse(stored);
+            // Re-map plain JSON objects back into true Movie class instances
+            return parsed.map(m => new Movie(m.id, m.title, m.year, m.rating));
         }
-        localStorage.setItem('movieDatabase', JSON.stringify(defaultMovies));
-        return defaultMovies;
+        // Convert raw default objects into Movie instances with IDs and ratings
+        const initial = defaultMovies.map((m, index) => new Movie(index + 1, m.title, m.year, m.rating || 5.0));
+        this.saveToStorage(initial);
+        return initial;
     }
+
     saveToStorage() {
         localStorage.setItem('movieDatabase', JSON.stringify(this.movieList));
     }
-  }
-   // Save current list to localStorage
-    saveToStorage(data) {
-        localStorage.setItem('movieDatabase', JSON.stringify(data));
+
+    movieRow(movie, index) {
+        const rootElement = document.getElementById(this.rootId);
+        if (!rootElement) return;
+        const row = document.createElement('li');
+        row.classList.add('row', 'list-group-item', 'd-flex', 'justify-content-between', 'align-items-center', 'mb-2', 'shadow-sm');
+        row.innerHTML = `
+            <span><strong>#${index + 1} (ID ${movie.id}):</strong> ${movie.title} (${movie.year})</span>
+            <span class="badge bg-primary rounded-pill">⭐ ${movie.rating}/10</span>
+        `;
+        rootElement.appendChild(row);
     }
 
-    // Render the movie list into the DOM
-    render() {
-        const container = document.getElementById(this.containerId);
-        if (!container) return; // Safely exit if container isn't on this page
-
-        container.innerHTML = "";
-        this.movieList.forEach((movie, index) => {
-            const li = document.createElement("li");
-            li.className = "list-group-item d-flex justify-content-between align-items-center mb-2 shadow-sm";
-            li.innerHTML = `
-                <span><strong>#${index + 1} (ID ${movie.id}):</strong> ${movie.title} (${movie.year})</span>
-            `;
-            container.appendChild(li);
-        });
+    genMovieList() {
+        for (let i = 0; i < this.movieList.length; i++) {
+            this.movieRow(this.movieList[i], i);
+        }
     }
-        // Add a movie
-    add(title, year) {
+
+    removeElements() {
+        const rootElement = document.getElementById(this.rootId);
+        if (!rootElement) return;
+        const childNodes = rootElement.getElementsByClassName('row');
+        while (childNodes.length > 0) {
+            rootElement.removeChild(childNodes[0]);
+        }
+    }
+
+    refresh() {
+        this.removeElements();
+        this.genMovieList();
+    }
+
+    add(title, year, rating) {
         const newId = this.movieList.length > 0 ? Math.max(...this.movieList.map(m => m.id)) + 1 : 1;
-        const newMovie = new Movie(newId, title, year);
+        const newMovie = new Movie(newId, title, year, rating);
         this.movieList.push(newMovie);
-        this.saveToStorage(this.movieList);
-        this.render();
+        this.saveToStorage();
+        this.refresh();
     }
 
-    // Update a movie by index
-    update(index, title, year) {
+    update(index, title, year, rating) {
         if (this.movieList[index]) {
             this.movieList[index].title = title;
-            this.movieList[index].year = year;
-            this.saveToStorage(this.movieList);
-            this.render();
+            this.movieList[index].year = Number(year);
+            this.movieList[index].rating = Number(rating);
+            this.saveToStorage();
+            this.refresh();
         }
     }
 
-    // Delete a movie by index
     delete(index) {
-        if (index >= 0 && index < this.movieList.length) {
-            this.movieList.splice(index, 1);
-            this.saveToStorage(this.movieList);
-            this.render();
-        }
+        this.movieList.splice(index, 1);
+        this.saveToStorage();
+        this.refresh();
     }
 
-    // Get a specific row
     getRow(index) {
         return this.movieList[index];
     }
 
-    // Search movies by title keyword
-    search(keyword) {
-        const container = document.getElementById(this.containerId);
-        if (!container) return;
-
-        const filtered = this.movieList.filter(m => m.title.toLowerCase().includes(keyword.toLowerCase()));
-        container.innerHTML = "";
-        filtered.forEach((movie, index) => {
-            const li = document.createElement("li");
-            li.className = "list-group-item d-flex justify-content-between align-items-center mb-2 shadow-sm";
-            li.innerHTML = `<span><strong>Match:</strong> ${movie.title} (${movie.year})</span>`;
-            container.appendChild(li);
-        });
-    }
-
-    // Sort A to Z
     sortA2Z() {
         this.movieList.sort((a, b) => a.title.localeCompare(b.title));
-        this.saveToStorage(this.movieList);
-        this.render();
+        this.saveToStorage();
+        this.refresh();
     }
 
-    // Sort Z to A
     sortZ2A() {
         this.movieList.sort((a, b) => b.title.localeCompare(a.title));
-        this.saveToStorage(this.movieList);
-        this.render();
+        this.saveToStorage();
+        this.refresh();
     }
+
+    search(nameString) {
+        let shortList = this.movieList.filter(movie => movie.title.toLowerCase().includes(nameString.toLowerCase()));
+        this.removeElements();
+        shortList.forEach((movie, index) => this.movieRow(movie, index));
+    }
+}
