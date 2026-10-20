@@ -82,31 +82,34 @@ button:hover {
 }
 /* Movie list styles */
 #mList {
-  border: 6px double crimson;
+  border: 3px solid #1e3d59;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 ol {
   margin-left: 1.5rem;
-  border: 2px solid #333333;
+  border: 1px solid #cbd5e1;
   margin-bottom: 1.5rem;
   margin-right: 1.5rem;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
-.list{
+.list {
   margin-top: 0.5rem;
 }
 
 .list .row {
-  padding: 5px 15px;
+  padding: 10px 15px;
   cursor: pointer;
+  border-bottom: 1px solid #e2e8f0;
 }
 
-.list .row:nth-child(odd){
-  background-color: #dddddd;
-}
-
-.list .row:hover{
-  background-color: yellow;
+.list .row:nth-child(odd) {
+  background-color: #f8fafc;
 }
 /*tab section styles */
 .tab{
