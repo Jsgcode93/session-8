@@ -37,15 +37,18 @@ loadFromStorage(defaultMovies) {
         localStorage.setItem('movieDatabase', JSON.stringify(this.movieList));
     }
 
-    movieRow(movie, index) {
+movieRow(movie, index) {
         const rootElement = document.getElementById(this.rootId);
         if (!rootElement) return;
+        
         const row = document.createElement('li');
         row.classList.add('row', 'list-group-item', 'd-flex', 'justify-content-between', 'align-items-center', 'mb-2', 'shadow-sm');
+        
+        // Simple, clean text display for title, year, and rating
         row.innerHTML = `
-            <span><strong>#${index + 1} (ID ${movie.id}):</strong> ${movie.title} (${movie.year})</span>
-            <span class="badge bg-primary rounded-pill">⭐ ${movie.rating}/10</span>
+            <span><strong>#${index + 1}:</strong> ${movie.title} (${movie.year}) - Rating: ${movie.rating}</span>
         `;
+        
         rootElement.appendChild(row);
     }
 
