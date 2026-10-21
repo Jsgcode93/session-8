@@ -22,14 +22,20 @@ class MovieList {
 
 loadFromStorage(defaultMovies) {
         const stored = localStorage.getItem('movieDatabase');
-        if (stored) {
-            const parsed = JSON.parse(stored);
-            // Re-map plain JSON objects back into true Movie class instances
-            return parsed.map(m => new Movie(m.id, m.title, m.year, m.rating));
+        if (stored && stored !== "undefined" && stored !== "null") {
+            try {
+                const parsed = JSON.parse(stored);
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                    return parsed.map(m => new Movie(m.id, m.title, m.year, m.rating));
+                }
+            } catch (e) {
+                console.error("Failed to parse localStorage, resetting...", e);
+            }
         }
-        // Convert raw default objects into Movie instances with IDs and ratings
+        
+        // Generate initial default movies with IDs and ratings
         const initial = defaultMovies.map((m, index) => new Movie(index + 1, m.title, m.year, m.rating || 5.0));
-        this.saveToStorage(initial);
+        localStorage.setItem('movieDatabase', JSON.stringify(initial));
         return initial;
     }
 
