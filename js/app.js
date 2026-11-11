@@ -1,90 +1,73 @@
 /**
  * @file app.js
- * @description Main application controller linking HTML elements to MovieList and Movie classes.
+ * @description This file contains JavaScript for our movie app.
+ * It contains the movieList instance, the event functions and UI code.
+ * cspell: ignore Jeremy Geddes colour tabcontent tablinks 
+ * @author Jeremy Geddes
+ * @version 2.1
  */
 
-let movieList;
+/**
+ * @global
+ * @description The initial list of movies for our app.
+ */
+let initialMovies = [
+  {title: "The Redemption", year: 1994, rating: 9.3 },
+  {title: "The Matrix" , year: 1999, rating: 8.7 },
+  {title: "SAW 1 ", year: 2002, rating: 7.6 },
+  {title: "Face Off", year: 1997, rating: 7.3 },
+  {title: "The Terminator", year: 2000, rating: 8.1 },
+  {title: "Drag me to hell", year: 2011, rating: 6.6 },
+  {title: "Bad boys 2", year: 2008, rating: 6.8 },
+  {title: "Get rich or die trying", year: 2005, rating: 5.4 }
+];
 
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Initial fallback data if localStorage is empty
-    const defaultMovies = [
-        { title: "The Shawshank Redemption", year: 1994, rating: 9.3, description: "Two imprisoned men bond over years.", movieImage: "" },
-        { title: "The Matrix", year: 1999, rating: 8.7, description: "A hacker learns the truth about reality.", movieImage: "" },
-        { title: "Inception", year: 2010, rating: 8.8, description: "A thief who steals corporate secrets through dream-sharing.", movieImage: "" }
-    ];
+/**
+ * @memberof MovieList
+ * @instance movieList
+ * @param {string} rootId - The id of the element we want to have our movieList appear in
+ * @param {Array} initialMovies - The array of movies in our movieList
+ * @global
+ * @description The movieList instance to keep track of our list of movies in the app
+ */
+let movieList = new MovieList('list', initialMovies);
 
-    // 2. Initialize the MovieList instance targeting <ol id="list">
-    movieList = new MovieList('list', defaultMovies);
+// Getting all the buttons from our application
+const searchBtn = document.getElementById('searchBtn');
+const sortA2ZBtn = document.getElementById('sortA2ZBtn');
+const sortZ2ABtn = document.getElementById('sortZ2ABtn');
+const addSubmit = document.getElementById('addSubmit');
+const updateSubmit = document.getElementById('updateSubmit');
+const deleteSubmit = document.getElementById('deleteSubmit');
 
-    // 3. Attach event listeners to buttons
-    const searchBtn = document.getElementById("searchBtn");
-    if (searchBtn) {
-        searchBtn.addEventListener("click", searchClick);
-    }
+// Add event handlers (with safety checks)
+if (searchBtn) searchBtn.addEventListener('click', searchClick);
+if (sortA2ZBtn) sortA2ZBtn.addEventListener('click', a2zClick);
+if (sortZ2ABtn) sortZ2ABtn.addEventListener('click', z2aClick);
+if (addSubmit) addSubmit.addEventListener('click', addClick);
+if (updateSubmit) updateSubmit.addEventListener('click', updateClick);
+if (deleteSubmit) deleteSubmit.addEventListener('click', deleteClick);
 
-    const sortA2ZBtn = document.getElementById("sortA2ZBtn");
-    if (sortA2ZBtn) {
-        sortA2ZBtn.addEventListener("click", () => movieList.sortA2Z());
-    }
-
-    const sortZ2ABtn = document.getElementById("sortZ2ABtn");
-    if (sortZ2ABtn) {
-        sortZ2ABtn.addEventListener("click", () => movieList.sortZ2A());
-    }
-});
-
-// 2. Initialize the MovieList 
-    movieList = new MovieList('list', defaultMovies);
-
-    // 3. Event Listeners
-    const searchBtn = document.getElementById("searchBtn");
-    if (searchBtn) searchBtn.addEventListener("click", searchClick);
-
-    // Sort Dropdown Event Listener
-    const sortSelect = document.getElementById("sortSelect");
-    if (sortSelect) {
-        sortSelect.addEventListener("change", function() {
-            switch (this.value) {
-                case 'a2z': movieList.sortA2Z(); break;
-                case 'z2a': movieList.sortZ2A(); break;
-                case 'yearNew': movieList.sortByYear(false); break; // false = descending (newest first)
-                case 'yearOld': movieList.sortByYear(true); break;  // true = ascending (oldest first)
-                case 'ratingHigh': movieList.sortByRating(false); break; // false = descending (highest first)
-                case 'ratingLow': movieList.sortByRating(true); break;  // true = ascending (lowest first)
-                default: break;
-            }
-        });
-    }
-/*  Add a new movie to the movielist */
-function addClick() {
-    const formElements = document.getElementById("form-add").elements;
-    const title = formElements["title"].value.trim();
-    const year = Number(formElements["year"].value);
-    const rating = Number(formElements["rating"].value) || 0;
-    const description = formElements["description"].value.trim();
-    const movieImage = formElements["movieImage"].value.trim();
-
-    const pattern = /^[a-z0-9\s]*$/i;
-    const isValidTitle = pattern.test(title);
-    const isValidYear = Number.isInteger(year) && year >= 1888;
-    const isValidRating = rating >= 0 && rating <= 10;
-
-    if (isValidTitle && isValidYear && isValidRating) {
-        try {
-            movieList.add(title, year, rating, description, movieImage);
-            document.getElementById("form-add").reset();
-            showMessage("Movie Added Successfully", "chartreuse", "black");
-        } catch (err) {
-            showMessage(err.message, "red", "white");
-        }
-    } else if (!isValidTitle) {
-        showMessage("Invalid title: must be alphanumeric with spaces only", "red", "white");
-    } else if (!isValidYear) {
-        showMessage("Invalid year: must be a valid integer from 1888 onwards", "red", "white");
-    } else {
-        showMessage("Invalid rating: must be between 0 and 10", "red", "white");
-    }
+/** 
+ * Search for a movie by partial title
+ * @event Click#searchBtn
+ * @function searchClick
+ */
+function searchClick(){
+  let formElements = document.getElementById("form-list-control").elements;
+  let text = formElements["search-string"].value;
+  movieList.search(text);
 }
+
+/**
+ * Sort the movieList in ascending order
+ * @event Click#a2zButton
+ * @function a2zClick
+ */
+function a2zClick(){
+  movieList.sortA2Z();
+}
+
 /**
  * Sort the movieList in descending order
  * @event Click#z2aButton
@@ -99,28 +82,34 @@ function z2aClick(){
  * @function addClick
  * @description add a new movie to the list
  */
-function addClick(){
-    // Get form from the DOM
+function addClick() {
     let formElements = document.getElementById("form-add").elements;
-    // get the title and the year
     let title = formElements["title"].value;
     let year = Number(formElements["year"].value);
+    let rating = Number(formElements["rating"].value);
     
     const pattern = /^[a-z0-9\s]*$/i;
     const test = pattern.test(title);
     const yearIsInt = Number.isInteger(year);
+    const ratingIsValid = !isNaN(rating) && rating >= 0 && rating <= 10;
 
-    if (test && yearIsInt){
-        movieList.add(title, Number(year));
+    if (test && yearIsInt && ratingIsValid) {
+        movieList.add(title, year, rating); 
+
         formElements.title.value = "";
         formElements.year.value = "";
+        formElements.rating.value = "";
+        
         showMessage("Movie Added Successfully", "chartreuse", "black");
-    } else if(!test){
+    } else if (!test) {
         showMessage("Invalid title, must be alphanumeric with spaces only", "red", "white");
-    } else {
+    } else if (!yearIsInt) {
         showMessage("Invalid year, must be an integer", "red", "white");
+    } else {
+        showMessage("Invalid rating, must be between 0 and 10", "red", "white");
     }
 }
+
 
 /**
  * Get movie data from the movie list to update when typing an index in the index input in the update form
@@ -276,13 +265,21 @@ function showMessage(message, colour, text){
 // Timeout or cancel for showMessage
 
 
-// Expand this application
-// Finish validation for updating
-// use a class for each Movie
-// Add in more properties for the movie
-// id, rating, description, movieImage (movie poster).
-// Upgrade the UI
-// Make it multiple pages 
-// Search by ID or year or rating
-// Sort by year or rating
-// Timeout or cancel for showMessage
+document.addEventListener("DOMContentLoaded", () => {
+    const manager = new MovieManager();
+    const listContainer = document.getElementById("list");
+
+    function renderList() {
+        listContainer.innerHTML = "";
+        manager.movies.forEach(movie => {
+            const li = document.createElement("li");
+            li.className = "list-group-item d-flex justify-content-between align-items-center mb-2 shadow-sm";
+            li.innerHTML = `
+                <span><strong>ID ${movie.id}:</strong> ${movie.title} (${movie.year}) - Rating: ${movie.rating}</span>
+            `;
+            listContainer.appendChild(li);
+        });
+    }
+
+    renderList();
+});
